@@ -38,6 +38,7 @@
     <Compile Include="Cpu\Cpu.cs" />
     <Compile Include="Cpu\CpuInstruction.cs" />
     <Compile Include="Cpu\CpuOpCodes.cs" />
+    <Compile Include="Cpu\ICpuInstructionExecutor.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Memory\IMemory.cs" />

@@ -4,6 +4,8 @@ namespace Machine.Cpu
 {
     public class CpuInstruction
     {
+        public const int Width = Word.Width;
+
         private Word _raw;
 
         public CpuInstruction(){}

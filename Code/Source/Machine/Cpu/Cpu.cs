@@ -3,12 +3,22 @@
 namespace Machine.Cpu
 {
     public interface ICpu
-    {        
+    {
+        Register AX { get; }
+        Register BX { get; }
+        Register CX { get; }
+        Register DX { get; }
+
+        Register SP { get; }
+        Register IP { get; }
+
+        void Start();
     }
 
     public class BasicCpu : ICpu
     {
-        private IMemory _memory;
+        private readonly IMemory _memory;
+        private readonly ICpuInstructionExecutor _instructionExector;
 
         private Register _ax;
         private Register _bx;
@@ -18,11 +28,14 @@ namespace Machine.Cpu
         private Register _sp;
         private Register _ip;
 
-        public BasicCpu(IMemory memory)
+        public BasicCpu(IMemory memory, ICpuInstructionExecutor instructionExector)
         {
             SetupRegisters();
 
             _memory = memory;
+            _instructionExector = instructionExector;
+
+            _instructionExector.Cpu = this;
         }
 
         public Register AX { get { return _ax; } }
@@ -42,6 +55,15 @@ namespace Machine.Cpu
 
             _sp = new Register();
             _ip = new Register();
+        }
+
+        public void Start()
+        {
+            while(true)
+            {
+                var instruction = new CpuInstruction(_memory.GetWordAt(IP));
+                _instructionExector.Execute(instruction);
+            }
         }
     }
 }

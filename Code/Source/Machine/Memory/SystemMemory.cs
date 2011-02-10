@@ -1,4 +1,5 @@
-﻿using Machine.Memory.Exceptions;
+﻿using System;
+using Machine.Memory.Exceptions;
 
 namespace Machine.Memory
 {
@@ -21,10 +22,17 @@ namespace Machine.Memory
             var ret = new Word();
             for (var i = 0 ; i < Word.Width ; ++i)
             {
-                ValidateMemoryAccess(location + i);
-                ret.SetByte(i, _space[location + i]);
+                ret.SetByte(i, this[location + i]);
             }
             return ret;
+        }
+
+        public void SetWordAt(Word location, Word value)
+        {
+            for (var i = 0 ; i < Word.Width ; ++i)
+            {
+                this[location + i] = value.GetByte(i);
+            }
         }
 
         public byte this [Word index]

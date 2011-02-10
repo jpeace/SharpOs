@@ -3,6 +3,6 @@
     public enum CpuOpCodes
     {
         Nop = 0x1,
-        JmpRel8 = 0x2
+        JmpAbs = 0x2
     }
 }
