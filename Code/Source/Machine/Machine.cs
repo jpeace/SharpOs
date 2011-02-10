@@ -1,3 +1,6 @@
+using Machine.Cpu;
+using Machine.Memory;
+
 namespace Machine
 {
     public class Machine

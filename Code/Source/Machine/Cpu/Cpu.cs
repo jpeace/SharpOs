@@ -1,8 +1,9 @@
-﻿namespace Machine
+﻿using Machine.Memory;
+
+namespace Machine.Cpu
 {
     public interface ICpu
-    {
-        
+    {        
     }
 
     public class BasicCpu : ICpu
@@ -42,18 +43,5 @@
             _sp = new Register();
             _ip = new Register();
         }
-
-
-    }
-
-    public enum CpuOpCodes
-    {
-        Nop = 0x1,
-        JmpRel8 = 0x2
-    }
-
-    public class CpuInstruction
-    {
-        private Word _word;
     }
 }

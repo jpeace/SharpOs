@@ -33,19 +33,19 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cpu.cs" />
+    <Compile Include="Cpu\Cpu.cs" />
+    <Compile Include="Cpu\CpuInstruction.cs" />
+    <Compile Include="Cpu\CpuOpCodes.cs" />
     <Compile Include="Machine.cs" />
-    <Compile Include="SystemMemory.cs" />
-    <Compile Include="MemoryAccessException.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Memory\IMemory.cs" />
+    <Compile Include="Memory\SystemMemory.cs" />
+    <Compile Include="Memory\Exceptions\MemoryAccessException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Register.cs" />
-    <Compile Include="Word.cs" />
+    <Compile Include="Cpu\Register.cs" />
+    <Compile Include="Memory\Word.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

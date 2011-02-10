@@ -1,11 +1,7 @@
-﻿namespace Machine
-{
-    public interface IMemory
-    {
-        Word MemorySize { get; }
-        byte this[Word index] { get; set; }
-    }
+﻿using Machine.Memory.Exceptions;
 
+namespace Machine.Memory
+{
     public class SystemMemory : IMemory
     {
         private readonly Word _memorySize;
@@ -19,6 +15,17 @@
         }
 
         public Word MemorySize { get { return _memorySize; } }
+
+        public Word GetWordAt(Word location)
+        {
+            var ret = new Word();
+            for (var i = 0 ; i < Word.Width ; ++i)
+            {
+                ValidateMemoryAccess(location + i);
+                ret.SetByte(i, _space[location + i]);
+            }
+            return ret;
+        }
 
         public byte this [Word index]
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Machine
+namespace Machine.Memory.Exceptions
 {
     public class MemoryAccessException : Exception {}
 }

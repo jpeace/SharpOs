@@ -42,10 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cpu\cpu_instruction_structure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecificationExtensions.cs" />
-    <Compile Include="Words\when_getting_bytes.cs" />
-    <Compile Include="Words\when_setting_bytes.cs" />
+    <Compile Include="Words\getting_bytes.cs" />
+    <Compile Include="Words\setting_bytes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Machine\Machine.csproj">
