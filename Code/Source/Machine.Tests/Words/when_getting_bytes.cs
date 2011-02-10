@@ -23,5 +23,14 @@ namespace Machine.Tests.Words
         {
             _word.LowByte.ShouldEqual(0x78);
         }
+
+        [Test]
+        public void arbitrary_bytes_are_properly_evaluated()
+        {
+            _word.GetByte(0).ShouldEqual(0x12);
+            _word.GetByte(1).ShouldEqual(0x34);
+            _word.GetByte(2).ShouldEqual(0x56);
+            _word.GetByte(3).ShouldEqual(0x78);
+        }
     }
 }
