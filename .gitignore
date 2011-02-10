@@ -1,0 +1,10 @@
+obj
+bin
+Bin
+Obj
+*.suo
+*.csproj.user
+_Resharper.*
+_ReSharper.*
+*.ReSharper.user
+Code/Source/CommonAssemblyInfo.cs
