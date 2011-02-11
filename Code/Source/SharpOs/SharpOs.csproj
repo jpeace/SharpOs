@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E8355436-FE44-4932-AB5F-30377BD4A6B8}</ProjectGuid>
+    <ProjectGuid>{94FF083D-9801-4798-B069-C19F60F980E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Machine</RootNamespace>
-    <AssemblyName>Machine</AssemblyName>
+    <RootNamespace>SharpOs</RootNamespace>
+    <AssemblyName>SharpOs</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,27 +33,20 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cpu\Cpu.cs" />
-    <Compile Include="Cpu\Execution\Instructions\CpuInstruction.cs" />
-    <Compile Include="Cpu\Execution\CpuInstructionExecutor.cs" />
-    <Compile Include="Cpu\Execution\Instructions\CpuOpCodes.cs" />
-    <Compile Include="Cpu\Execution\Instructions\Handlers\JmpRelHandler.cs" />
-    <Compile Include="Cpu\ICpu.cs" />
-    <Compile Include="Cpu\Execution\ICpuInstructionExecutor.cs" />
-    <Compile Include="Cpu\Execution\ICpuInstructionHandler.cs" />
-    <Compile Include="Cpu\Execution\Instructions\Handlers\IntHandler.cs" />
-    <Compile Include="Cpu\Execution\Instructions\Handlers\JmpAbsHandler.cs" />
-    <Compile Include="Cpu\Execution\Instructions\Handlers\NopHandler.cs" />
-    <Compile Include="Machine.cs" />
-    <Compile Include="Extensions\ObjectExtensions.cs" />
-    <Compile Include="Memory\IMemory.cs" />
-    <Compile Include="Memory\SystemMemory.cs" />
-    <Compile Include="Memory\Exceptions\MemoryAccessException.cs" />
+    <Compile Include="Boostrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Cpu\Register.cs" />
-    <Compile Include="Memory\Word.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Machine\Machine.csproj">
+      <Project>{E8355436-FE44-4932-AB5F-30377BD4A6B8}</Project>
+      <Name>Machine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,6 @@
 ﻿using Machine.Memory;
 
-namespace Machine.Cpu
+namespace Machine.Cpu.Execution.Instructions
 {
     public class CpuInstruction
     {

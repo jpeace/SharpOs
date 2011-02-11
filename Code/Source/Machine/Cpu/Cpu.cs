@@ -1,23 +1,15 @@
-﻿using Machine.Memory;
+﻿using System;
+using System.Collections.Generic;
+using Machine.Cpu.Execution;
+using Machine.Cpu.Execution.Instructions;
+using Machine.Memory;
 
 namespace Machine.Cpu
 {
-    public interface ICpu
-    {
-        Register AX { get; }
-        Register BX { get; }
-        Register CX { get; }
-        Register DX { get; }
-
-        Register SP { get; }
-        Register IP { get; }
-
-        void Start();
-    }
-
     public class BasicCpu : ICpu
     {
         private readonly IMemory _memory;
+        private readonly IDictionary<byte, Action> _interruptTable;
         private readonly ICpuInstructionExecutor _instructionExector;
 
         private Register _ax;
@@ -36,6 +28,8 @@ namespace Machine.Cpu
             _instructionExector = instructionExector;
 
             _instructionExector.Cpu = this;
+
+            _interruptTable = new Dictionary<byte, Action>();
         }
 
         public Register AX { get { return _ax; } }
@@ -55,6 +49,21 @@ namespace Machine.Cpu
 
             _sp = new Register();
             _ip = new Register();
+        }
+
+        public Action Interrupt(byte vectorEntry)
+        {
+            if (!_interruptTable.ContainsKey(vectorEntry) || _interruptTable[vectorEntry] == null)
+            {
+                return () => { };
+            }
+            return _interruptTable[vectorEntry];
+        }
+
+        public void HookInterrupt(byte vectorEntry, Action handler)
+        {
+            _interruptTable.Remove(vectorEntry);
+            _interruptTable.Add(vectorEntry, handler);
         }
 
         public void Start()

@@ -1,36 +1,48 @@
+using System;
 using Machine.Cpu;
+using Machine.Cpu.Execution;
+using Machine.Cpu.Execution.Instructions.Handlers;
 using Machine.Memory;
 
 namespace Machine
 {
-    public class Machine
+    public interface IMachine
     {
-        private ICpu _cpu;
+        ICpu Cpu { get; }
+        IMemory Memory { get; }
+    }
+
+    public class Machine : IMachine
+    {
+        private readonly ICpu _cpu;
         private readonly IMemory _memory;
         
-        public Machine()
+        private Machine()
         {
             _memory = new SystemMemory(1024);
 
             var executor = new CpuInstructionExecutor();
             executor.AddHandler<NopHandler>();
             executor.AddHandler<JmpAbsHandler>();
+            executor.AddHandler<JmpRelHandler>();
+            executor.AddHandler<IntHandler>();
 
             _cpu = new BasicCpu(_memory, executor);
-
-            var nop = new CpuInstruction {OpCode = CpuOpCodes.Nop};
-            var jmp = new CpuInstruction {OpCode = CpuOpCodes.JmpAbs, SingleOperand = 100};
-
-            _memory.SetWordAt(100, nop.Raw);
-            _memory.SetWordAt(104, jmp.Raw);
-
-            _cpu.IP.Store(100);
         }
 
+        public ICpu Cpu { get { return _cpu; } }
         public IMemory Memory { get { return _memory; } }
-        public void Start()
+        
+        private void Start()
         {
             _cpu.Start();
+        }
+        
+        public static void Boot(Action<IMachine> bootstrapper)
+        {
+            var m = new Machine();
+            bootstrapper(m);
+            m.Start();
         }
     }
 }

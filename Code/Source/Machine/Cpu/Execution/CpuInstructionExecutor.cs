@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
+using Machine.Cpu.Execution.Instructions;
 
-namespace Machine.Cpu
+namespace Machine.Cpu.Execution
 {
-    public interface ICpuInstructionExecutor
-    {
-        ICpu Cpu { set; }
-        void Execute(CpuInstruction instruction);
-    }
-
     class CpuInstructionExecutor : ICpuInstructionExecutor
     {
         private ICpu _cpu;
@@ -52,40 +45,6 @@ namespace Machine.Cpu
         public void AddHandler(ICpuInstructionHandler handler)
         {
             _handlers.Add(handler);
-        }
-    }
-
-    public interface ICpuInstructionHandler
-    {
-        CpuOpCodes OpCodeHandled { get; }
-        void Handle(ICpu cpu, CpuInstruction instruction);
-    }
-
-    public class NopHandler : ICpuInstructionHandler
-    {
-        public CpuOpCodes OpCodeHandled
-        {
-            get { return CpuOpCodes.Nop; }
-        }
-
-        public void Handle(ICpu cpu, CpuInstruction instruction)
-        {
-            Debug.WriteLine("In NOP");
-            cpu.IP.Increment(CpuInstruction.Width);
-        }
-    }
-
-    public class JmpAbsHandler : ICpuInstructionHandler
-    {
-        public CpuOpCodes OpCodeHandled
-        {
-            get { return CpuOpCodes.JmpAbs; }
-        }
-
-        public void Handle(ICpu cpu, CpuInstruction instruction)
-        {
-            Debug.WriteLine("In JMP");
-            cpu.IP.Store(instruction.SingleOperand);
         }
     }
 }

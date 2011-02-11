@@ -1,4 +1,4 @@
-using Machine.Cpu;
+using Machine.Cpu.Execution.Instructions;
 using Machine.Memory;
 using NUnit.Framework;
 
@@ -41,6 +41,13 @@ namespace Machine.Tests.Cpu
         {
             _cut.RightOperand = 0x1234;
             _cut.Raw.ShouldEqual((Word) 0x00001234);
+        }
+
+        [Test]
+        public void negative_operands_are_properly_stored()
+        {
+            _cut.SingleOperand = -1;
+            _cut.SingleOperand.ShouldEqual(-1);
         }
     }
 }
